@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class KasiskiAttack {
+
+
+    public static void main(String[] args){
+        //this program runs a kasiski attack
+        //it finds instances of trigrams in a given ciphertext
+        //then finds the distances between each instance
+        //then, by finding the lowest common factor of those distances
+        //we can estimate the key-length
+
+        //create scanner
+        Scanner scan = new Scanner(System.in);
+
+        //request the ciphertext from the user, and store in variable ciphertext
+
+        System.out.println("Paste the ciphertext:");
+        String ciphertext = scan.nextLine();
+
+        //run attack method on text
+        attack(ciphertext);
+
+    }
+
+    public static void attack(String text){
+
+        int length = text.length();
+        int end = length - 3;
+
+        //iterate over the entire text
+        for (int i = 0; i <= end; i++){
+            //select our trigram
+            String trigram = text.substring(i, i+3);
+
+
+            //create our comparison trigrams
+            for (int j = i+1; j<=end; j++){
+                String compare = text.substring(j, j+3);
+
+
+                //check to see if they're the same
+                if (trigram.equals(compare)) {
+                    int distance = j - i;
+                    System.out.println("the distance between instances of " + trigram + " is " + distance);
+                    // factorise the distance, highest possible factor 12
+                    for (int x = 2; x <= 12; x++){
+                        if (distance % x == 0){
+                            System.out.println("Possible keyword length is " + x);
+                        }
+                    }
+
+
+                }
+            }
+
+
+        }
+
+    }
+}
