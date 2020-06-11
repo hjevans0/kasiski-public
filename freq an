@@ -1,0 +1,66 @@
+/* this program is a frequency analysis.
+It takes an encrypted cipher text, given by the user,
+and counts the number of times each letter of the alphabet appears.
+It prints out each letter and number of ocurrences.
+ */
+
+
+
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class FrequenyAnalysis {
+
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter the ciphertext:");
+        String cipherText = scan.nextLine();
+
+        analyse(cipherText);
+
+
+    }
+
+    public static void analyse(String cipherText){
+        //remove spaces from string, and assigns to variable "text"
+        String text = cipherText.replaceAll("\\s", "");
+        text = text.toUpperCase();
+
+        //converting to char arrary
+        char[] chars = text.toCharArray();
+
+        //create alphabet
+        char[] alphabet;
+        alphabet = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+
+
+        //compare each character of our text against the alphabet
+
+        for (char letter: alphabet){
+            int total = 0;
+            for (char compare: chars){
+                if (letter == compare){
+                    total ++;
+
+                }
+            }
+            if (total > 0) {
+                System.out.println("The letter " + letter + " Appears " + total + " times.");
+            }
+
+        }
+
+    }
+
+    public static void swapCharArray(char[] array, int swap1, int swap2){
+
+        char helper = array[swap1];
+        array[swap1] = array[swap2];
+        array[swap2] = helper;
+
+    }
+
+}
